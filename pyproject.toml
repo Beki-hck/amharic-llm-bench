@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "amharic-llm-bench"
+version = "0.1.0"
+description = "A hand-written Amharic benchmark (QA, multiple choice, translation, summarization) for LLMs, built on evalforge."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Bereket Abebe" }]
+dependencies = [
+    "evalforge @ https://github.com/Beki-hck/evalforge/archive/refs/heads/main.zip",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "sacrebleu>=2.4"]
+
+[project.scripts]
+amharic-bench = "amharic_bench.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+amharic_bench = ["suites/*.jsonl"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

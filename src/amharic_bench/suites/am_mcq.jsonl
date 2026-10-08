@@ -1,0 +1,28 @@
+{"system": "ለጥያቄው ትክክለኛውን አማራጭ ይምረጡ። የመጨረሻውን መስመር 'መልስ: <ፊደል>' በሚል ቅርጽ ይጻፉ (ለምሳሌ፦ መልስ: B)።"}
+{"id": "mcq-01", "category": "culture", "scorer": "am_choice", "expected": "D", "prompt": "የኢትዮጵያ ዋና ከተማ የትኛዋ ናት?\n\nA) ጎንደር\nB) ባሕር ዳር\nC) ሐረር\nD) አዲስ አበባ"}
+{"id": "mcq-02", "category": "culture", "scorer": "am_choice", "expected": "A", "prompt": "የኢትዮጵያ የዘመን አቆጣጠር በዓመት ስንት ወራት አሉት?\n\nA) 13\nB) 11\nC) 14\nD) 12"}
+{"id": "mcq-03", "category": "culture", "scorer": "am_choice", "expected": "B", "prompt": "ኢትዮጵያውያን አዲስ ዓመትን (እንቁጣጣሽን) የሚያከብሩት በየትኛው ወር ነው?\n\nA) ጥር\nB) መስከረም\nC) ሚያዝያ\nD) ሐምሌ"}
+{"id": "mcq-04", "category": "culture", "scorer": "am_choice", "expected": "D", "prompt": "ጤፍ በዋነኝነት ለየትኛው ምግብ ይውላል?\n\nA) ቡና\nB) ጠጅ\nC) ቅቤ\nD) እንጀራ"}
+{"id": "mcq-05", "category": "culture", "scorer": "am_choice", "expected": "C", "prompt": "አማርኛ የሚጻፍበት ፊደል ምን ተብሎ ይጠራል?\n\nA) ዓረብኛ\nB) ሲሪሊክ\nC) ግዕዝ (ፊደል)\nD) ላቲን"}
+{"id": "mcq-06", "category": "history", "scorer": "am_choice", "expected": "B", "prompt": "የዓድዋ ጦርነት የተካሄደው በየትኛው ዓመት (በአውሮፓውያን አቆጣጠር) ነው?\n\nA) 1941\nB) 1896\nC) 1974\nD) 1935"}
+{"id": "mcq-07", "category": "history", "scorer": "am_choice", "expected": "B", "prompt": "በዓድዋ ጦርነት ኢትዮጵያ ያሸነፈችው የትኛውን አገር ጦር ነው?\n\nA) ጀርመን\nB) ጣሊያን\nC) እንግሊዝ\nD) ፈረንሳይ"}
+{"id": "mcq-08", "category": "geography", "scorer": "am_choice", "expected": "C", "prompt": "ከሚከተሉት ውስጥ የኢትዮጵያ ከፍተኛው ተራራ የትኛው ነው?\n\nA) እንጦጦ\nB) ቱሉ ዲምቱ\nC) ራስ ዳሽን\nD) ዝቋላ"}
+{"id": "mcq-09", "category": "geography", "scorer": "am_choice", "expected": "A", "prompt": "ከሚከተሉት ሐይቆች ውስጥ በኢትዮጵያ የሚገኘው የትኛው ነው?\n\nA) ጣና\nB) ታንጋኒካ\nC) ቪክቶሪያ\nD) ቻድ"}
+{"id": "mcq-10", "category": "geography", "scorer": "am_choice", "expected": "C", "prompt": "አዲስ አበባ የምትገኘው በየትኛው አህጉር ነው?\n\nA) አውሮፓ\nB) ደቡብ አሜሪካ\nC) አፍሪካ\nD) እስያ"}
+{"id": "mcq-11", "category": "culture", "scorer": "am_choice", "expected": "B", "prompt": "የኢትዮጵያ ገንዘብ ምን ተብሎ ይጠራል?\n\nA) ዲናር\nB) ብር\nC) ሺሊንግ\nD) ናይራ"}
+{"id": "mcq-12", "category": "culture", "scorer": "am_choice", "expected": "A", "prompt": "የኢትዮጵያ ሰንደቅ ዓላማ ሦስቱ ዋና ቀለማት የትኞቹ ናቸው?\n\nA) አረንጓዴ፣ ቢጫ እና ቀይ\nB) ጥቁር፣ ነጭ እና ቀይ\nC) ቀይ፣ ነጭ እና ሰማያዊ\nD) ሰማያዊ፣ ነጭ እና ጥቁር"}
+{"id": "mcq-13", "category": "culture", "scorer": "am_choice", "expected": "A", "prompt": "የጥምቀት በዓል የሚከበረው በየትኛው ወር ነው?\n\nA) ጥር\nB) መስከረም\nC) ነሐሴ\nD) ግንቦት"}
+{"id": "mcq-14", "category": "culture", "scorer": "am_choice", "expected": "A", "prompt": "የመስቀል በዓል የሚከበረው በየትኛው ወር ነው?\n\nA) መስከረም\nB) ታኅሣሥ\nC) ሰኔ\nD) የካቲት"}
+{"id": "mcq-15", "category": "culture", "scorer": "am_choice", "expected": "D", "prompt": "ክራር ምንድን ነው?\n\nA) ወንዝ\nB) የምግብ ዓይነት\nC) ከተማ\nD) የሙዚቃ መሣሪያ"}
+{"id": "mcq-16", "category": "culture", "scorer": "am_choice", "expected": "B", "prompt": "ዶሮ ወጥ ምንድን ነው?\n\nA) የመጠጥ ዓይነት\nB) የባህል ምግብ\nC) የሙዚቃ መሣሪያ\nD) የልብስ ዓይነት"}
+{"id": "mcq-17", "category": "vocabulary", "scorer": "am_choice", "expected": "D", "prompt": "ከሰኞ ቀጥሎ የሚመጣው ቀን የትኛው ነው?\n\nA) እሑድ\nB) ረቡዕ\nC) ዓርብ\nD) ማክሰኞ"}
+{"id": "mcq-18", "category": "vocabulary", "scorer": "am_choice", "expected": "A", "prompt": "\"ውሃ\" የሚለው ቃል በእንግሊዝኛ ምን ማለት ነው?\n\nA) water\nB) bread\nC) fire\nD) house"}
+{"id": "mcq-19", "category": "vocabulary", "scorer": "am_choice", "expected": "C", "prompt": "\"ሰላም\" የሚለው ቃል በእንግሊዝኛ ምን ማለት ነው?\n\nA) war\nB) road\nC) peace\nD) rain"}
+{"id": "mcq-20", "category": "vocabulary", "scorer": "am_choice", "expected": "D", "prompt": "የ\"ትልቅ\" ተቃራኒ ቃል የትኛው ነው?\n\nA) ከባድ\nB) ሰፊ\nC) ረጅም\nD) ትንሽ"}
+{"id": "mcq-21", "category": "vocabulary", "scorer": "am_choice", "expected": "C", "prompt": "የ\"ፈጣን\" ተቃራኒ ቃል የትኛው ነው?\n\nA) ቀላል\nB) ረጅም\nC) ቀርፋፋ\nD) አዲስ"}
+{"id": "mcq-22", "category": "grammar", "scorer": "am_choice", "expected": "D", "prompt": "የ\"ልጅ\" ብዙ ቁጥር የትኛው ነው?\n\nA) ልጅነት\nB) ልጃገረድ\nC) ልጅቱ\nD) ልጆች"}
+{"id": "mcq-23", "category": "grammar", "scorer": "am_choice", "expected": "C", "prompt": "\"ልጆቹ ኳስ ___\" የሚለውን ዓረፍተ ነገር በትክክል የሚያሟላው የትኛው ነው?\n\nA) ትጫወታለች\nB) እጫወታለሁ\nC) ይጫወታሉ\nD) ይጫወታል"}
+{"id": "mcq-24", "category": "grammar", "scorer": "am_choice", "expected": "A", "prompt": "\"እኔ ትናንት ወደ ገበያ ___\" የሚለውን ዓረፍተ ነገር በትክክል የሚያሟላው የትኛው ነው?\n\nA) ሄድኩ\nB) ሄዱ\nC) ሄድን\nD) ሄደች"}
+{"id": "mcq-25", "category": "grammar", "scorer": "am_choice", "expected": "A", "prompt": "\"እሷ በየቀኑ ቡና ___\" የሚለውን ዓረፍተ ነገር በትክክል የሚያሟላው የትኛው ነው?\n\nA) ትጠጣለች\nB) ይጠጣል\nC) ይጠጣሉ\nD) እጠጣለሁ"}
+{"id": "mcq-26", "category": "math", "scorer": "am_choice", "expected": "B", "prompt": "አሥራ አምስት ሲደመር ሃያ ሰባት ስንት ነው?\n\nA) 52\nB) 42\nC) 41\nD) 32"}
+{"id": "mcq-27", "category": "math", "scorer": "am_choice", "expected": "A", "prompt": "አንድ ሰው 100 ብር ይዞ 35 ብር ቢያወጣ ስንት ብር ይቀረዋል?\n\nA) 65\nB) 75\nC) 55\nD) 135"}
