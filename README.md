@@ -19,7 +19,7 @@ Amharic has more than 50 million speakers, but most open models are tuned and ev
 
 ## What's in it
 
-All 113 items were written for this benchmark, so no model has seen them in training. The passages are fictional.
+All 113 items were written for this benchmark, so no model has seen them in training, and I reviewed every one as an Amharic speaker. The passages are fictional.
 
 | Suite | Items | Task | Score |
 |---|---|---|---|
@@ -71,7 +71,7 @@ Gemma's lead is far outside the confidence intervals. Llama and Qwen can't be se
 - chrF misses meaning errors in single words. Gemma translated "Saturday" as "Friday" and still scored 61.9 on that sentence.
 - Each summary has one reference, so chrF on `am_sum` is a rough signal.
 - Answer key changes are recorded below. After the first full run I read every QA failure for all three models and accepted two answers that were correct but missing from the key.
-- Native-speaker review of the items is pending. Run `python scripts/export_review.py` to get a review sheet.
+- The items were drafted with AI assistance. On 2026-10-08 I reviewed all 113, as an Amharic speaker, and found nothing to correct. `python scripts/export_review.py` writes the review sheet I used.
 
 ## Quick start
 
