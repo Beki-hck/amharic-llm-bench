@@ -53,3 +53,11 @@ def test_cli_run_writes_results_and_leaderboard(tmp_path, capsys):
 def test_cli_list_and_normalize(capsys):
     assert main(["list"]) == 0 and "am_qa" in capsys.readouterr().out
     assert main(["normalize", "ሠላም"]) == 0 and capsys.readouterr().out.strip() == "ሰላም"
+
+
+def test_ollama_answers_are_capped():
+    from amharic_bench.models import CappedOllamaModel, get_model
+
+    m = get_model("ollama:llama3.2:3b", max_tokens=64)
+    assert isinstance(m, CappedOllamaModel) and m.max_tokens == 64 and m.name == "ollama:llama3.2:3b"
+    assert get_model("echo:x").name == "echo:x"

@@ -8,11 +8,11 @@ import sys
 from pathlib import Path
 
 from evalforge.cli import _slug
-from evalforge.models import get_model
 from evalforge.report import html_report
 from evalforge.runner import run_suite
 
 from . import leaderboard
+from .models import DEFAULT_MAX_TOKENS, get_model
 from .normalize import normalize
 from .suites import SUITES, load
 
@@ -34,7 +34,7 @@ def cmd_run(args) -> int:
     out_dir = Path(args.out)
     saved = sorted(out_dir.glob("*__*.json"))  # keep earlier runs on the leaderboard
     for spec in args.model:
-        model = get_model(spec)
+        model = get_model(spec, max_tokens=args.max_tokens)
         for name in names:
             suite = load(name)
             run = run_suite(suite, model, workers=args.workers, limit=args.limit,
@@ -77,6 +77,8 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("-o", "--out", default="results", help="output folder (default: results)")
     r.add_argument("-w", "--workers", type=int, default=2)
     r.add_argument("-n", "--limit", type=int, help="only the first N items of each suite")
+    r.add_argument("--max-tokens", type=int, default=DEFAULT_MAX_TOKENS,
+                   help=f"cap on answer length, stops repetition loops (default: {DEFAULT_MAX_TOKENS})")
     r.set_defaults(fn=cmd_run)
 
     lb = sub.add_parser("leaderboard", help="rebuild the leaderboard from saved result files")
