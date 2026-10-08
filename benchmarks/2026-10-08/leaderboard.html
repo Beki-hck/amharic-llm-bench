@@ -1,0 +1,20 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Amharic LLM leaderboard</title><style>
+:root{--bg:#fff;--fg:#1b1f24;--muted:#5b6470;--line:#e3e6ea;--ok:#1a7f37;--bad:#cf222e;--bar:#2f6feb;--card:#f6f8fa}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1117;--fg:#e6edf3;--muted:#8b949e;--line:#30363d;--ok:#3fb950;--bad:#f85149;--bar:#4c8dff;--card:#161b22}}
+*{box-sizing:border-box}body{margin:0;padding:24px 16px;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,sans-serif}
+main{max-width:1000px;margin:auto}h1{margin:0 0 4px}p.sub{color:var(--muted);margin:0 0 24px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.card b{display:block;font-size:28px}.card span{color:var(--muted);font-size:13px}
+.bar{height:6px;background:var(--line);border-radius:3px;margin-top:8px}.bar i{display:block;height:100%;background:var(--bar);border-radius:3px}
+table{width:100%;border-collapse:collapse;margin:8px 0 28px;font-size:14px}th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600}.ok{color:var(--ok)}.bad{color:var(--bad)}
+details{margin:6px 0}summary{cursor:pointer}pre{white-space:pre-wrap;background:var(--card);padding:8px;border-radius:6px;font-size:12.5px;max-height:240px;overflow:auto}
+.wrap{overflow-x:auto}
+</style></head><body><main>
+<h1>Amharic LLM leaderboard</h1>
+<p class="sub">QA and MCQ are % correct; translation and summary are mean chrF (0–100). Brackets are 95% bootstrap intervals.</p>
+<div class="wrap"><table><tr><th>Model</th><th>Average</th><th>QA<br><small>accuracy</small></th><th>MCQ<br><small>accuracy</small></th><th>EN→AM<br><small>chrF</small></th><th>AM→EN<br><small>chrF</small></th><th>Summary<br><small>chrF</small></th><th>Answered in Fidel</th><th>Drifted to other scripts</th><th>MCQ letters picked</th></tr><tr><td>ollama:gemma3:4b</td><td><b>53.6</b></td><td>92.3% <sub>[81–100]</sub></td><td>63.0% <sub>[44–81]</sub></td><td>7.4 <sub>[4–11]</sub></td><td>68.7 <sub>[61–76]</sub></td><td>36.6 <sub>[26–47]</sub></td><td>60%</td><td>34%</td><td>A:10, B:7, C:6, D:4</td></tr><tr><td>ollama:qwen2.5:3b</td><td><b>15.8</b></td><td>7.7% <sub>[0–19]</sub></td><td>18.5% <sub>[4–33]</sub></td><td>4.5 <sub>[3–7]</sub></td><td>16.0 <sub>[12–21]</sub></td><td>32.4 <sub>[25–39]</sub></td><td>83%</td><td>23%</td><td>A:2, B:8, C:4</td></tr><tr><td>ollama:llama3.2:3b</td><td><b>14.8</b></td><td>0.0% <sub>[0–0]</sub></td><td>22.2% <sub>[7–37]</sub></td><td>4.8 <sub>[4–6]</sub></td><td>17.0 <sub>[14–20]</sub></td><td>29.9 <sub>[19–40]</sub></td><td>100%</td><td>0%</td><td>A:11, C:11</td></tr></table></div>
+<p class="sub">Per-item answers are in details.html next to this file.</p>
+</main></body></html>

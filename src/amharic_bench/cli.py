@@ -9,7 +9,8 @@ from pathlib import Path
 
 from evalforge.cli import _slug
 from evalforge.report import html_report
-from evalforge.runner import run_suite
+from evalforge.runner import ItemResult, RunResult, run_suite
+from evalforge.scorers import ScoringContext, get_scorer
 
 from . import leaderboard
 from .models import DEFAULT_MAX_TOKENS, get_model
@@ -49,6 +50,33 @@ def cmd_run(args) -> int:
     return 0
 
 
+def rescore(path: Path) -> RunResult:
+    """Score saved answers again with the current suites and scorers (no model calls)."""
+    data = json.loads(path.read_text(encoding="utf-8"))
+    items = {it.id: it for it in load(data["suite"]).items}
+    results = []
+    for r in data["results"]:
+        r = ItemResult(**r)
+        if r.error is None and r.id in items:
+            item = items[r.id]
+            score = get_scorer(item.scorer)(item, r.answer, ScoringContext())
+            r.passed, r.value, r.detail = score.passed, score.value, score.detail
+        results.append(r)
+    run = RunResult(data["suite"], data["model"], data["started_at"], data["duration_s"], results)
+    run.save(path)
+    return run
+
+
+def cmd_rescore(args) -> int:
+    paths = [Path(p) for p in args.results]
+    for path in paths:
+        before = json.loads(path.read_text(encoding="utf-8"))["passed"]
+        run = rescore(path)
+        print(f"{path.name:<44} passed {before} -> {sum(r.passed for r in run.results)}")
+    print("\n" + _write_leaderboard(paths, Path(args.out)))
+    return 0
+
+
 def cmd_leaderboard(args) -> int:
     print(_write_leaderboard([Path(p) for p in args.results], Path(args.out)))
     return 0
@@ -85,6 +113,11 @@ def main(argv: list[str] | None = None) -> int:
     lb.add_argument("results", nargs="+")
     lb.add_argument("-o", "--out", default="results")
     lb.set_defaults(fn=cmd_leaderboard)
+
+    rs = sub.add_parser("rescore", help="re-score saved answers after a scorer or answer-key change")
+    rs.add_argument("results", nargs="+")
+    rs.add_argument("-o", "--out", default="results")
+    rs.set_defaults(fn=cmd_rescore)
 
     sub.add_parser("list", help="show the suites").set_defaults(fn=cmd_list)
 

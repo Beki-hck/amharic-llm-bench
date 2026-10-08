@@ -16,6 +16,7 @@ from pathlib import Path
 
 from evalforge.report import _CSS
 
+from .normalize import foreign_script_letters
 from .suites import SUITES
 
 BOOTSTRAP_SAMPLES = 2000
@@ -50,6 +51,18 @@ def _script_rate(runs: list[dict]) -> float | None:
     return 100 * (total - bad) / total if total else None
 
 
+def _drift_rate(runs: list[dict]) -> float | None:
+    """Share of Amharic-output items whose answer slips into a third script
+    (3+ letters that are neither Fidel nor Latin, e.g. Chinese or Cyrillic)."""
+    total = drift = 0
+    for run in runs:
+        if run["suite"] in ("en_am", "am_sum"):
+            for r in run["results"]:
+                total += 1
+                drift += foreign_script_letters(r["answer"]) >= 3
+    return 100 * drift / total if total else None
+
+
 def build(runs: list[dict]) -> list[dict]:
     """One row per model: score and CI per suite, macro average, script rate, MCQ letter picks."""
     by_model: dict[str, list[dict]] = {}
@@ -73,6 +86,7 @@ def build(runs: list[dict]) -> list[dict]:
             "suites": cells,
             "average": sum(c["score"] for c in cells.values()) / len(cells) if complete else None,
             "script_rate": _script_rate(model_runs),
+            "drift_rate": _drift_rate(model_runs),
             "mcq_picks": dict(sorted(picks.items())),
         })
     rows.sort(key=lambda r: -(r["average"] if r["average"] is not None else -1))
@@ -88,14 +102,15 @@ def _fmt(cell: dict | None, metric: str) -> str:
 
 
 def markdown(rows: list[dict]) -> str:
-    head = "| Model | Average | " + " | ".join(f"{lab} ({m})" for lab, m in SUITES.values()) + " | Answered in Fidel |"
-    sep = "|" + "---|" * (len(SUITES) + 3)
+    head = "| Model | Average | " + " | ".join(f"{lab} ({m})" for lab, m in SUITES.values()) + " | Answered in Fidel | Drifted to other scripts |"
+    sep = "|" + "---|" * (len(SUITES) + 4)
     lines = [head, sep]
     for r in rows:
         avg = f"**{r['average']:.1f}**" if r["average"] is not None else "–"
         cells = [_fmt(r["suites"].get(s), m) for s, (_, m) in SUITES.items()]
         script = f"{r['script_rate']:.0f}%" if r["script_rate"] is not None else "–"
-        lines.append(f"| {r['model']} | {avg} | " + " | ".join(cells) + f" | {script} |")
+        drift = f"{r['drift_rate']:.0f}%" if r["drift_rate"] is not None else "–"
+        lines.append(f"| {r['model']} | {avg} | " + " | ".join(cells) + f" | {script} | {drift} |")
     return "\n".join(lines)
 
 
@@ -107,13 +122,14 @@ def html_page(rows: list[dict], title: str = "Amharic LLM leaderboard") -> str:
         avg = f"<b>{r['average']:.1f}</b>" if r["average"] is not None else "–"
         cells = "".join(f"<td>{_fmt(r['suites'].get(s), m)}</td>" for s, (_, m) in SUITES.items())
         script = f"{r['script_rate']:.0f}%" if r["script_rate"] is not None else "–"
+        drift = f"{r['drift_rate']:.0f}%" if r["drift_rate"] is not None else "–"
         picks = ", ".join(f"{k}:{v}" for k, v in r["mcq_picks"].items()) or "–"
-        body += f"<tr><td>{e(r['model'])}</td><td>{avg}</td>{cells}<td>{script}</td><td>{e(picks)}</td></tr>"
+        body += f"<tr><td>{e(r['model'])}</td><td>{avg}</td>{cells}<td>{script}</td><td>{drift}</td><td>{e(picks)}</td></tr>"
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{e(title)}</title><style>{_CSS}</style></head><body><main>
 <h1>{e(title)}</h1>
 <p class="sub">QA and MCQ are % correct; translation and summary are mean chrF (0–100). Brackets are 95% bootstrap intervals.</p>
-<div class="wrap"><table><tr><th>Model</th><th>Average</th>{head}<th>Answered in Fidel</th><th>MCQ letters picked</th></tr>{body}</table></div>
+<div class="wrap"><table><tr><th>Model</th><th>Average</th>{head}<th>Answered in Fidel</th><th>Drifted to other scripts</th><th>MCQ letters picked</th></tr>{body}</table></div>
 <p class="sub">Per-item answers are in details.html next to this file.</p>
 </main></body></html>"""
 

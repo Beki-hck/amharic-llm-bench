@@ -88,12 +88,24 @@ def normalize(text: str, *, homophones: bool = True, punctuation: bool = True,
     return re.sub(r"\s+", " ", text).strip()
 
 
+def _letters(text: str) -> list[str]:
+    return [c for c in text if c.isalpha()]
+
+
 def ethiopic_ratio(text: str) -> float:
     """Share of letters in `text` that are Ethiopic script (digits and punctuation ignored).
 
-    Used to catch a model that answers an Amharic task in English or in
-    Latin-letter transliteration ("selam" instead of "ሰላም").
+    Used to catch a model that answers an Amharic task in English, in
+    Latin-letter transliteration ("selam" instead of "ሰላም"), or in another script.
     """
-    eth = len(_ETHIOPIC_LETTER.findall(text))
-    latin = len(_LATIN_LETTER.findall(text))
-    return eth / (eth + latin) if eth + latin else 0.0
+    letters = _letters(text)
+    eth = sum(1 for c in letters if _ETHIOPIC_LETTER.match(c))
+    return eth / len(letters) if letters else 0.0
+
+
+def foreign_script_letters(text: str) -> int:
+    """Count letters that are neither Ethiopic nor basic/extended Latin (e.g. Chinese,
+    Korean, Cyrillic). A model "drifting" into these mid-answer is a distinct
+    failure from answering in English.
+    """
+    return sum(1 for c in _letters(text) if not _ETHIOPIC_LETTER.match(c) and ord(c) >= 0x0250)

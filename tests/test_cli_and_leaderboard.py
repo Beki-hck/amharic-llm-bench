@@ -61,3 +61,22 @@ def test_ollama_answers_are_capped():
     m = get_model("ollama:llama3.2:3b", max_tokens=64)
     assert isinstance(m, CappedOllamaModel) and m.max_tokens == 64 and m.name == "ollama:llama3.2:3b"
     assert get_model("echo:x").name == "echo:x"
+
+
+def test_rescore_uses_current_answer_key(tmp_path):
+    suite = load("am_qa")
+    run = run_suite(suite, FunctionModel(lambda p: "ደሴ", label="m"), limit=1)
+    path = run.save(tmp_path / "am_qa__m.json")
+    data = json.loads(path.read_text(encoding="utf-8"))
+    data["results"][0].update(passed=False, value=0.0, detail="stale")
+    path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    assert main(["rescore", str(path), "-o", str(tmp_path)]) == 0
+    assert json.loads(path.read_text(encoding="utf-8"))["passed"] == 1
+
+
+def test_drift_is_counted_separately_from_english():
+    from amharic_bench.normalize import ethiopic_ratio, foreign_script_letters
+
+    assert foreign_script_letters("请发烧时大量饮水。") == 8 and ethiopic_ratio("请发烧时大量饮水。") == 0.0
+    assert foreign_script_letters("ሰላም hello café") == 0
+    assert foreign_script_letters("300 ኪሎ ግራም половине") == 8
